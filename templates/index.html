@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Desi Player by Mirza</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+        }
+        .navbar {
+            background-color: #222;
+        }
+        .navbar-dark .navbar-brand {
+            font-family: 'Funky', cursive;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+        }
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #fff;
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            background-color: #222;
+            color: #fff;
+        }
+        .custom-container {
+            max-width: 768px; /* Adjust this to control the maximum width of the content */
+            margin: auto;
+        }
+        /* Customize the button */
+        .custom-button {
+            background-color: #007bff; /* Change the button's background color */
+            color: #fff; /* Change the button's text color */
+            border: none; /* Remove the button's border */
+            border-radius: 25px; /* Adjust the button's border radius for a different shape */
+            padding: 15px 30px; /* Adjust the button's padding for a larger size */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Desi Player by Mirza</a>
+    </nav>
+
+    <div class="custom-container mt-5">
+        <h1 class="text-center">Audio Player</h1>
+        <div class="form-group">
+            <input type="text" id="youtubeLink" class="form-control" placeholder="Enter YouTube Video URL">
+        </div>
+        <div class="text-center">
+            <!-- Apply the custom button class to the Play button -->
+            <button class="btn custom-button" id="playButton">Play</button>
+        </div>
+        <audio id="audioPlayer" controls autoplay class="mt-3" style="width: 100%; max-width: 100%;"></audio>
+    </div>
+
+    <div class="custom-container mt-5">
+        <h2 class="text-center">About Me</h2>
+        <div class="card">
+            <img src="https://mirza-webdeveloper.000webhostapp.com/webPIC.png" class="card-img-top img-fluid" alt="Your Picture">
+            <div class="card-body">
+                <h5 class="card-title text-center">Abdullah</h5>
+                <p class="card-text text-center">Website Developer and Superior University Student.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5">
+        <p>&copy; 2023 Desi Player by Mirza. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#playButton").click(function() {
+                var videoLink = $("#youtubeLink").val();
+                $.post("/play_audio", { videoLink: videoLink }, function(data) {
+                    if (data.success) {
+                        $("#audioPlayer").attr("src", data.audioURL);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
